@@ -1,0 +1,31 @@
+{
+    "name": "igrejanet/gerencianet",
+    "description": "Wrapper for use GerenciaNet on Laravel FrameWork",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matheus Lopes Santos",
+            "email": "fale_com_lopez@hotmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "gerencianet/gerencianet-sdk-php": "2.*",
+        "illuminate/support": "^5.5",
+        "nesbot/carbon": "^1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Igrejanet\\GerenciaNet\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
+    }
+}
