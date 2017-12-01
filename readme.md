@@ -15,7 +15,8 @@ Realize a Instalação do Pacote Via composer:
 $ composer require igrejanet/gerencianet
 ```
 
-PS.: O pacote já vem com *package auto-discovery* para utilização com Laravel
+PS.: O pacote já vem com *package auto-discovery* para utilização com Laravel.
+A Classe `Gerencianet` é instanciada automaticamente em *Singleton*
 
 Utilização
 ---
@@ -86,7 +87,8 @@ $billingAddress = new BillingAddress(
     'MG'
 );
 
-// O desconto pode ser aplicado em centavos ou porcentagem. No caso de porcentagem, multiplicar o valor por 100
+// O desconto pode ser aplicado em centavos ou porcentagem.
+//No caso de porcentagem, multiplicar o valor por 100
 $discount = new DiscountManager(1000);
 
 // Se o cliente pagar com boleto...
@@ -96,10 +98,16 @@ if($isBoleto) {
     $method->setCustomer($customer);
     
 } else if($isCartao) {
-    $method = new CreditCard($paymentToken, $installments); // Estas variáveis são repassadas pela tela de checkout
+    // Estas variáveis são repassadas pela tela de checkout
+    $method = new CreditCard($paymentToken, $installments);
+    
     $method->setCustomer($customer);
-    $method->setBillingAddress($billingAddress); // O End. de cobrança deve ser aplicado em pagamentos via CC
-    $method->setDiscount($discount); // O desconto pode ser aplicado em ambos os métodos
+    
+    // O End. de cobrança deve ser aplicado em pagamentos via CC
+    $method->setBillingAddress($billingAddress);
+    
+    // O desconto pode ser aplicado em ambos os métodos
+    $method->setDiscount($discount);
 }
 
 $chargeSender = new ChargeSender($gerencianet);
