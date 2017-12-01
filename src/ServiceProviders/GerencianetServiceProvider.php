@@ -16,7 +16,7 @@ use Illuminate\Support\ServiceProvider;
 class GerencianetServiceProvider extends ServiceProvider
 {
     protected $defer = true;
-    
+
     public function register()
     {
         $this->mergeConfigFrom(
