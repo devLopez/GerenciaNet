@@ -27,5 +27,12 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Igrejanet\\GerenciaNet\\ServiceProviders\\GerencianetServiceProvider"
+            ]
+        }
     }
 }
