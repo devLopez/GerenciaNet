@@ -119,6 +119,28 @@ $response = $chargeSender->sendPaymentRequest($method, $charge_id);
 
 ```
 
+Notifications
+---
+O sistema do GerenciaNet envia uma notificação ao seu sistema sempre que o status da transação
+é alterado. Para receber estas notificações e os novos status da cobrança, faça:
+```php
+<?php
+
+use Gerencianet\Gerencianet;
+use Igrejanet\GerenciaNet\Notifications;
+
+$gerencianet = new Gerencianet([
+    'client_id'     => 'meu_client_id',
+    'client_secret' => 'meu_client_secret',
+    'sandbox'       => true // Ou false, caso em produção
+]);
+
+$notifications = new Notifications($gerencianet);
+
+// O token é repassado via POST pelo sistema de notificações do GerenciaNet
+$status = $notifications->receiveNotification($token);
+```
+
 Testes
 ---
 Existem dois testes que devem ser executados separadamente, pois, antes de executá-los
@@ -127,6 +149,7 @@ você deve setar o seu client_id e client_secret no arquivo *phpunit.xml*. Somen
 
 * ChargeCreatorTest.php
 * ChargeSenderTest.php
+* IgrejanetTest.php
 
 Ao executar o PHPUnit, somente os testes que não utilizam acesso à API são executados.
 
