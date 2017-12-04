@@ -3,6 +3,7 @@
 namespace Igrejanet\GerenciaNet\ServiceProviders;
 
 use Gerencianet\Gerencianet;
+use Igrejanet\GerenciaNet\Igrejanet;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -11,7 +12,7 @@ use Illuminate\Support\ServiceProvider;
  * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
  * @version 1.0.0
  * @since   01/12/2017
- * @package Igrejanet\GerenciaNet\ServiceProviders
+ * @package Igrejanet\Igrejanet\ServiceProviders
  */
 class GerencianetServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,13 @@ class GerencianetServiceProvider extends ServiceProvider
             $options = config('gerencianet');
 
             return new Gerencianet($options);
+        });
+
+        $this->app->singleton(Igrejanet::class, function () {
+            $account_id = config('gerencianet.account_id');
+            $sandbox    = config('gerencianet.sandbox');
+
+            return new Igrejanet($account_id, $sandbox);
         });
     }
 }

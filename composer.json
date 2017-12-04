@@ -32,7 +32,10 @@
         "laravel": {
             "providers": [
                 "Igrejanet\\GerenciaNet\\ServiceProviders\\GerencianetServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Igrejanet": "Igrejanet\\GerenciaNet\\Facades\\IgrejanetFacade"
+            }
         }
     }
 }
