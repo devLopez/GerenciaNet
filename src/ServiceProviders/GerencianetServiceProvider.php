@@ -10,21 +10,24 @@ use Illuminate\Support\ServiceProvider;
  * GerencianetServiceProvider
  *
  * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
- * @version 1.0.0
- * @since   01/12/2017
+ * @version 1.0.1
+ * @since   06/12/2017
  * @package Igrejanet\Igrejanet\ServiceProviders
  */
 class GerencianetServiceProvider extends ServiceProvider
 {
     protected $defer = true;
 
-    public function register()
+    public function boot()
     {
         $this->mergeConfigFrom(
             __DIR__ . '/../../resources/gerencianet.php',
             'gerencianet'
         );
+    }
 
+    public function register()
+    {
         $this->app->singleton(Gerencianet::class, function () {
             $options = config('gerencianet');
 
