@@ -16,14 +16,11 @@ use Illuminate\Support\ServiceProvider;
  */
 class GerencianetServiceProvider extends ServiceProvider
 {
-    protected $defer = true;
-
     public function boot()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../../resources/gerencianet.php',
-            'gerencianet'
-        );
+        $this->publishes([
+            __DIR__ . '/../../resources/gerencianet.php' => config_path('gerencianet.php')
+        ],'config');
     }
 
     public function register()
