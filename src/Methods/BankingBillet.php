@@ -8,8 +8,8 @@ use Carbon\Carbon;
  * BankingBillet
  *
  * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
- * @version 1.0.0
- * @since   30/11/2017
+ * @version 1.0.1
+ * @since   07/12/2017
  * @package Igrejanet\GerenciaNet\Methods
  */
 class BankingBillet extends PaymentMethod
@@ -21,10 +21,13 @@ class BankingBillet extends PaymentMethod
 
     /**
      * @param   int  $days
+     * @return  $this
      */
     public function setExpirationDate(int $days)
     {
         $this->expire_at = Carbon::now()->addDays($days)->format('Y-m-d');
+
+        return $this;
     }
 
     /**
