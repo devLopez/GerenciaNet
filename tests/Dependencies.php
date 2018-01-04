@@ -20,8 +20,7 @@ trait Dependencies
             'João Carmélio da Silva',
             '32214653783',
             'joao@company.com',
-            '3895281420',
-            '1990-01-01'
+            '3895281420'
         );
     }
 

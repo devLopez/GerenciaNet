@@ -44,19 +44,39 @@ class Customer implements CustomerContract
     protected $birth;
 
     /**
-     * @param   $name
-     * @param   $cpf
-     * @param   $email
-     * @param   $phone_number
-     * @param   $birth
+     * @param   string  $name
+     * @param   string  $cpf
+     * @param   string  $email
+     * @param   string  $phone_number
+     * @param   string|null  $birth
+     * @param   bool  $isJuridical
      */
-    public function __construct($name, $cpf, $email, $phone_number, $birth)
+    public function __construct($name, $cpf, $email, $phone_number, $birth = null, bool $isJuridical = false)
     {
-        $this->name         = $name;
-        $this->cpf          = $this->onlyNumbers($cpf, true);
-        $this->email        = $email;
-        $this->phone_number = $this->onlyNumbers($phone_number, true);
-        $this->birth        = $birth;
+        if( $isJuridical ) {
+            $this->setJuridicalPerson($name, $cpf);
+        } else {
+            $this->setName($name);
+            $this->setCpf($cpf);
+        }
+
+        $this->setEmail($email);
+        $this->setPhoneNumber($phone_number);
+        $this->setBirth($birth);
+    }
+
+    public function setJuridicalPerson($companyName, $cnpj)
+    {
+        $document = $this->onlyNumbers($cnpj, true);
+
+        $this->juridical_person = [
+            'corporate_name'    => $companyName,
+            'cnpj'              => $document
+        ];
+
+        unset($this->name, $this->cpf);
+
+        return $this;
     }
 
     /**
@@ -66,6 +86,8 @@ class Customer implements CustomerContract
     public function setName($name)
     {
         $this->name = $name;
+
+        unset($this->juridical_person);
 
         return $this;
     }
@@ -77,6 +99,8 @@ class Customer implements CustomerContract
     public function setCpf($cpf)
     {
         $this->cpf = $this->onlyNumbers($cpf, true);
+
+        unset($this->juridical_person);
 
         return $this;
     }
@@ -107,9 +131,13 @@ class Customer implements CustomerContract
      * @param   string  $birth
      * @return  $this
      */
-    public function setBirth($birth)
+    public function setBirth($birth = null)
     {
-        $this->birth = $birth;
+        if( $birth ) {
+            $this->birth = $birth;
+        } else {
+            unset($this->birth);
+        }
 
         return $this;
     }

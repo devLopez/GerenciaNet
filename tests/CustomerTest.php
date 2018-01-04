@@ -27,5 +27,27 @@ class CustomerTest extends TestCase
         $this->assertInstanceOf(CustomerContract::class, $customer);
         $this->assertArrayHasKey('name', $serialization);
         $this->assertArrayHasKey('email', $serialization);
+        $this->assertArrayHasKey('birth', $serialization);
+    }
+
+    public function testJuridicalPerson()
+    {
+        $customer = new Customer(
+            'Moura & Moura',
+            '11254692000100',
+            'comercial@mouraemoura.com',
+            '3836904800',
+            '',
+            true
+        );
+
+        $serialization = $customer->serialize();
+
+        $this->assertInstanceOf(Customer::class, $customer);
+        $this->assertInstanceOf(CustomerContract::class, $customer);
+        $this->assertArrayHasKey('juridical_person', $serialization);
+        $this->assertArrayHasKey('corporate_name', $serialization['juridical_person']);
+        $this->assertArrayHasKey('cnpj', $serialization['juridical_person']);
+        $this->assertArrayNotHasKey('birth', $serialization);
     }
 }
