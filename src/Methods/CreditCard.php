@@ -9,8 +9,8 @@ use Igrejanet\GerenciaNet\Contracts\CreditCardInterface;
  * CreditCard
  *
  * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
- * @version 1.0.0
- * @since   30/11/2017
+ * @version 1.0.1
+ * @since   08/01/2018
  * @package Igrejanet\GerenciaNet\Methods
  */
 class CreditCard extends PaymentMethod implements CreditCardInterface
@@ -68,7 +68,7 @@ class CreditCard extends PaymentMethod implements CreditCardInterface
         ];
 
         if($this->discount) {
-            $paymentRequest['payment']['banking_billet']['discount'] = $this->discount;
+            $paymentRequest['payment']['credit_card']['discount'] = $this->discount;
         }
 
         return $paymentRequest;
