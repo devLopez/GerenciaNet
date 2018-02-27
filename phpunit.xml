@@ -13,6 +13,7 @@
             <directory suffix="Test.php">./tests</directory>
             <exclude>./tests/ChargeCreatorTest.php</exclude>
             <exclude>./tests/ChargeSenderTest.php</exclude>
+            <exclude>./tests/PaymentLinkCreatorTest.php</exclude>
             <exclude>./tests/IgrejanetTest.php</exclude>
         </testsuite>
     </testsuites>

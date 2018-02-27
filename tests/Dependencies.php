@@ -2,11 +2,13 @@
 
 namespace Tests;
 
+use Carbon\Carbon;
 use Gerencianet\Gerencianet;
 use Igrejanet\GerenciaNet\ChargeCreator;
 use Igrejanet\GerenciaNet\Customer\BillingAddress;
 use Igrejanet\GerenciaNet\Customer\Customer;
 use Igrejanet\GerenciaNet\Methods\DiscountManager;
+use Igrejanet\GerenciaNet\Methods\PaymentLink;
 use Igrejanet\GerenciaNet\Products;
 
 trait Dependencies
@@ -89,5 +91,16 @@ trait Dependencies
         $chargeCreator->setProducts($products);
 
         return $chargeCreator->generateCharge();
+    }
+
+    /**
+     * @return  PaymentLink
+     * @throws  \Igrejanet\GerenciaNet\Exceptions\InvalidPaymentTypeException
+     */
+    public function getPaymentLink()
+    {
+        return new PaymentLink(
+            Carbon::now()->addDays(3)
+        );
     }
 }
